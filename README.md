@@ -23,6 +23,11 @@ Upon viewing the visualization, the initial page with no topic selected shows th
 To check for its autenticity, we select [Topic 2](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=2&lambda=0.5&term=) and it becomes clear that car is indeed the most frequent feature of that topic appearing approximately around 2200 times.
 Second of all, when you go through the list of features of Topic 2 one can predict that this topic is mostly related to cleaning/washing products related to cars.
 
+Also, there are various topics that co-incide with each other which suggests that they are correlated.
+For instance, <b><i>Topic 2 and Topic 10</b></i> co-incide and therefore when you click on [Topic 10](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=10&lambda=0.5&term=) to see if it has relavent vocabulary to that of Topic 2, it turns out that the top 30 salient features of Topic 10 also have mentions of words that indicate towards cleansing products for cars or products that enhance the looks of a car, namely: leather, cleaner, smell, conditioner, spray, etc.
+
+
+
 ___
 <p align="center"> <b><i>Code</b></i></p>
 ___
