@@ -11,15 +11,19 @@ Text reviews analyzed using Topic modelling and visualized using LDAvis in R.
 <p align="center"> <b><i>Case</b></i></p>
 
 ____
-
+#####Loading the data set
 ```R
 > library(ndjson)
 > autocorpus <- ndjson::stream_in("E:/Business Analytics/Homeworks/Homework 8/Automotive_5.json")
-> View(vgdata)
+> View(autocorpus)
 > library(quanteda)
 > require(quanteda)
 > reviews<- corpus(autocorpus$reviewText, docvars = data.frame(summary=autocorpus$summary))
 > reviews<- toLower(reviews, keepAcronyms = FALSE)
+```
+
+The following code cleans the data set and creates a DFM
+```R
 > cleanc <- tokenize (reviews,
 +                     removeNumbers = TRUE,
 +                     removePunct = TRUE,
@@ -55,6 +59,10 @@ docs    need set jumper cabl new car
   text4    5   1      3   15   0  11
   text5    1   1      0    3   0   0
   text6    0   0      1    5   0   0
+
+```
+####Now we take a look at the top 50 features that appear in our data set
+```R
 > topfeatures<-topfeatures(dfm.reviews, n=50)
 > topfeatures
       use       car      work       one      will   product      just       get      like      good 
@@ -67,27 +75,10 @@ docs    need set jumper cabl new car
      2764      2686      2680      2658      2652      2638      2596      2576      2538      2526 
      even       buy      wash     remov      come    bought       put    replac      last      back 
      2514      2502      2450      2429      2361      2355      2348      2331      2301      2287 
-> term.table <- table(unlist(cleanc))
-> term.table <- sort(term.table, decreasing = TRUE)
-> stop_words <- stopwords("SMART")
-> stop_words <- c(stop_words, "can", "one", "will", "get", "just", "want","got", 
-+                 "even", "way", "even", "also","like","make","go")
-> stop_words <- tolower(stop_words)
-> del <- names(term.table) %in% stop_words | term.table < 5
-> term.table <- term.table[!del]
-> term.table <- term.table[names(term.table) != ""]
-> vocab <- names(term.table)
-> get.terms <- function(x) {
-+   index <- match(x, vocab)
-+   index <- index[!is.na(index)]
-+   rbind(as.integer(index - 1), as.integer(rep(1, length(index))))
-+ }
-> documents <- lapply(cleanc, get.terms)
-> D <- length(documents)  # number of documents (1)
-> W <- length(vocab)  # number of terms in the vocab (1741)
-> doc.length <- sapply(documents, function(x) sum(x[2, ]))  # number of tokens per document [312, 288, 170, 436, 291, ...]
-> N <- sum(doc.length)  # total number of tokens in the data (56196)
-> term.frequency <- as.integer(term.table)
+```
+And now we iterate our fitted corpus for topic modelling 3000 times that will generate 15 topics in the LDAvis package. K denotes the number of topics and G denotes the number of iterations.
+It took closely around 18 minutes to run the entire model.
+```R
 > K <- 15
 > G <- 3000
 > alpha <- 0.02
