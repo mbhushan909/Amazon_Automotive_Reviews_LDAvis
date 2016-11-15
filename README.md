@@ -9,3 +9,6 @@ Text reviews analyzed using Topic modelling and visualized using LDAvis in R.
 ---
 
 <p align="center"> <b><i>Case</b></i></p>
+
+____
+
