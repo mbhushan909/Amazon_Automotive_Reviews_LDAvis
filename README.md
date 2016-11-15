@@ -11,6 +11,10 @@ Text reviews analyzed using Topic modelling and visualized using LDAvis in R.
 <p align="center"> <b><i>Case</b></i></p>
 
 ____
+
+---
+<p align="center"> <b><i>Code</b></i></p>
+___
 #####Loading the data set
 ```R
 > library(ndjson)
