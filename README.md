@@ -16,7 +16,12 @@ The data set for this particular analyses has been taken from [Amazon product re
 
 This data set consisted of 10 columns and 20473 rows. But the data of our interest was mainly the "reviewText" column. Therefore a corpus with mainly the reviewText column was created for our usage. The complete code can be found in the <b><i>Code</b></i> section of this documentation.
 
+This analysis is conducted over automotive parts that are sold on Amazon and the reviews that Amazon customers have posted from May 1996 to July 2014. 
 
+Upon viewing the visualization, the initial page with no topic selected shows the most used or most frequently occuring words in the corpus of this review text. It is evident from the LDAvis visualization that the most frequent word from the top 30 is "car" and one would think that's obvious since the reviews are on automotive parts. The word car has appeared close to 7750 times. When you hover over the word car from the list of the top 30 Salient features, the topics that have the menion of "car" get enlarged. And so it can be seen that topics 4 and topic 13 have no mentions of the word car at all and based on the sizes of the topics, one can comprehend that topic 2 has the mention of car the most. 
+
+To check for its autenticity, we select [Topic 2](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=2&lambda=0.5&term=) and it becomes clear that car is indeed the most frequent feature of that topic appearing approximately around 2200 times.
+Second of all, when you go through the list of features of Topic 2 one can predict that this topic is mostly related to cleaning/washing products related to cars.
 
 ___
 <p align="center"> <b><i>Code</b></i></p>
