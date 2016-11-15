@@ -28,6 +28,8 @@ For instance, <b><i>Topic 2 and Topic 10 co-incide</b></i> and therefore when yo
 
 Topics 11, 14 and 15 are isolated and do not co-incide with any other topics, thus indicating their independence from other topics. For instance, [Topic 11](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=11&lambda=0.5&term=) mentions words wiper and blades which on the slider bar has 100% Overall term frequency and Estimated term frequency in this analysis, which proves that these words do ont appear on any other topics in this entire corpus and thus aloofs Topic 11 from the rest.
 
+[Topic 15](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=15&lambda=0.5&term=) appears to be a topic on tires of automotives and their maintenance. It also has some 100% appearance words like stem and inflate which are unique to this topic alone and perhaps could be reason for its isolation.
+
 Similarly, one may hover over different topics on the left panel of the visualization and look at the top 30 salient features of that topic to understand what that topic indicates about. 
 
 The section below documents the coding that was performed for this analysis.
@@ -132,7 +134,6 @@ Time difference of 17.69709 mins
 +                    doc.length = reviewdata$doc.length, 
 +                    vocab = reviewdata$vocab, 
 +                    term.frequency = reviewdata$term.frequency)
-> serVis(json, out.dir = 'Atomotive_5', open.browser = interactive())
 
 > serVis(json, out.dir = 'Atomotive_5', open.browser = TRUE)
 ```
