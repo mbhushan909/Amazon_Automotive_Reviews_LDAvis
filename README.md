@@ -12,3 +12,22 @@ Text reviews analyzed using Topic modelling and visualized using LDAvis in R.
 
 ____
 
+```R
+> library(ndjson)
+> autocorpus <- ndjson::stream_in("E:/Business Analytics/Homeworks/Homework 8/Automotive_5.json")
+> View(vgdata)
+> library(quanteda)
+> require(quanteda)
+> reviews<- corpus(autocorpus$reviewText, docvars = data.frame(summary=autocorpus$summary))
+> reviews<- toLower(reviews, keepAcronyms = FALSE)
+> cleanc <- tokenize (reviews,
++                     removeNumbers = TRUE,
++                     removePunct = TRUE,
++                     removeSeparators = TRUE,
++                     removeTwitter = TRUE,
++                     verbose = TRUE)
+Starting tokenization...
+  ...tokenizing texts...total elapsed:  1.17000000000007 seconds.
+  ...replacing names...total elapsed:  0 seconds.
+Finished tokenizing and cleaning 20,473 texts.
+```
