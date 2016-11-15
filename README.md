@@ -30,4 +30,94 @@ Starting tokenization...
   ...tokenizing texts...total elapsed:  1.17000000000007 seconds.
   ...replacing names...total elapsed:  0 seconds.
 Finished tokenizing and cleaning 20,473 texts.
+> dfm.reviews<- dfm(cleanc,
++                   toLower = TRUE, 
++                   ignoredFeatures =stopwords("english"), 
++                   verbose=TRUE, 
++                   stem=TRUE)
+Creating a dfm from a tokenizedTexts object ...
+   ... lowercasing
+   ... indexing documents: 20,473 documents
+   ... indexing features: 40,490 feature types
+   ... removed 168 features, from 174 supplied (glob) feature types
+   ... stemming features (English), trimmed 9205 feature variants
+   ... created a 20473 x 31117 sparse dfm
+   ... complete. 
+Elapsed time: 8.43 seconds.
+> head(dfm.reviews)
+Document-feature matrix of: 20,473 documents, 31,117 features.
+(showing first 6 documents and first 6 features)
+       features
+docs    need set jumper cabl new car
+  text1    1   1      1    1   1   2
+  text2    0   0      1    2   0   0
+  text3    4   0      1    4   1   1
+  text4    5   1      3   15   0  11
+  text5    1   1      0    3   0   0
+  text6    0   0      1    5   0   0
+> topfeatures<-topfeatures(dfm.reviews, n=50)
+> topfeatures
+      use       car      work       one      will   product      just       get      like      good 
+    16762      9300      8903      7893      6919      6836      6450      6268      6236      5816 
+    great       can      well      time      need      look   batteri      make     light      easi 
+     5793      5723      5683      4658      4527      4439      3966      3924      3906      3698 
+    clean      much    instal       fit    realli      also    better        go     price      keep 
+     3690      3411      3332      3302      3065      3058      2839      2838      2834      2799 
+    littl      year      nice recommend       oil    filter       wax      tire     water       tri 
+     2764      2686      2680      2658      2652      2638      2596      2576      2538      2526 
+     even       buy      wash     remov      come    bought       put    replac      last      back 
+     2514      2502      2450      2429      2361      2355      2348      2331      2301      2287 
+> term.table <- table(unlist(cleanc))
+> term.table <- sort(term.table, decreasing = TRUE)
+> stop_words <- stopwords("SMART")
+> stop_words <- c(stop_words, "can", "one", "will", "get", "just", "want","got", 
++                 "even", "way", "even", "also","like","make","go")
+> stop_words <- tolower(stop_words)
+> del <- names(term.table) %in% stop_words | term.table < 5
+> term.table <- term.table[!del]
+> term.table <- term.table[names(term.table) != ""]
+> vocab <- names(term.table)
+> get.terms <- function(x) {
++   index <- match(x, vocab)
++   index <- index[!is.na(index)]
++   rbind(as.integer(index - 1), as.integer(rep(1, length(index))))
++ }
+> documents <- lapply(cleanc, get.terms)
+> D <- length(documents)  # number of documents (1)
+> W <- length(vocab)  # number of terms in the vocab (1741)
+> doc.length <- sapply(documents, function(x) sum(x[2, ]))  # number of tokens per document [312, 288, 170, 436, 291, ...]
+> N <- sum(doc.length)  # total number of tokens in the data (56196)
+> term.frequency <- as.integer(term.table)
+> K <- 15
+> G <- 3000
+> alpha <- 0.02
+> eta <- 0.02
+> library(lda)
+> set.seed(357)
+> t1 <- Sys.time()
+> fit <- lda.collapsed.gibbs.sampler(documents = documents, K = K, vocab = vocab, 
++                                    num.iterations = G, alpha = alpha, 
++                                    eta = eta, initial = NULL, burnin = 0,
++                                    compute.log.likelihood = TRUE)
+> t2 <- Sys.time()
+> ## display runtime
+> t2 - t1
+Time difference of 17.69709 mins
+> theta <- t(apply(fit$document_sums + alpha, 2, function(x) x/sum(x)))
+> phi <- t(apply(t(fit$topics) + eta, 2, function(x) x/sum(x)))
+> reviewdata <- list(phi = phi,
++                    theta = theta,
++                    doc.length = doc.length,
++                    vocab = vocab,
++                    term.frequency = term.frequency)
+> library(LDAvis)
+> library(servr)
+> json <- createJSON(phi = reviewdata$phi, 
++                    theta = reviewdata$theta, 
++                    doc.length = reviewdata$doc.length, 
++                    vocab = reviewdata$vocab, 
++                    term.frequency = reviewdata$term.frequency)
+> serVis(json, out.dir = 'Atomotive_5', open.browser = interactive())
+
+> serVis(json, out.dir = 'Atomotive_5', open.browser = TRUE)
 ```
