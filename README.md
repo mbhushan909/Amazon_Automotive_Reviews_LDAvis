@@ -12,7 +12,7 @@ ___
 <p align="center"> <b><i>Case</b></i></p>
 
 ___
-The data set for this particular analyses has been taken from [Amazon product reviews data set](http://jmcauley.ucsd.edu/data/amazon/) which is maintained by [Julian McAuley](http://cseweb.ucsd.edu/~jmcauley/).
+The data set for this particular analyses has been taken from [Amazon product reviews data repository](http://jmcauley.ucsd.edu/data/amazon/) which is maintained by [Julian McAuley](http://cseweb.ucsd.edu/~jmcauley/).
 
 This data set consisted of 10 columns and 20473 rows. But the data of our interest was mainly the "reviewText" column. Therefore a corpus with mainly the reviewText column was created for our usage. The complete code can be found in the <b><i>Code</b></i> section of this documentation.
 
