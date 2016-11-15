@@ -24,9 +24,13 @@ To check for its autenticity, we select [Topic 2](https://rawgit.com/mbhushan909
 Second of all, when you go through the list of features of Topic 2 one can predict that this topic is mostly related to cleaning/washing products related to cars.
 
 Also, there are various topics that co-incide with each other which suggests that they are correlated.
-For instance, <b><i>Topic 2 and Topic 10</b></i> co-incide and therefore when you click on [Topic 10](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=10&lambda=0.5&term=) to see if it has relavent vocabulary to that of Topic 2, it turns out that the top 30 salient features of Topic 10 also have mentions of words that indicate towards cleansing products for cars or products that enhance the looks of a car, namely: leather, cleaner, smell, conditioner, spray, etc.
+For instance, <b><i>Topic 2 and Topic 10 co-incide</b></i> and therefore when you click on [Topic 10](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=10&lambda=0.5&term=) to see if it has relavent vocabulary to that of Topic 2, it turns out that the top 30 salient features of Topic 10 also have mentions of words that indicate towards cleansing products for cars or products that enhance the looks of a car, namely: leather, cleaner, smell, conditioner, spray, etc.
 
+Topics 11, 14 and 15 are isolated and do not co-incide with any other topics, thus indicating their independence from other topics. For instance, [Topic 11](https://rawgit.com/mbhushan909/Amazon_Automotive_Reviews_LDAvis/master/Atomotive_5/index.html#topic=11&lambda=0.5&term=) mentions words wiper and blades which on the slider bar has 100% Overall term frequency and Estimated term frequency in this analysis, which proves that these words do ont appear on any other topics in this entire corpus and thus aloofs Topic 11 from the rest.
 
+Similarly, one may hover over different topics on the left panel of the visualization and look at the top 30 salient features of that topic to understand what that topic indicates about. 
+
+The section below documents the coding that was performed for this analysis.
 
 ___
 <p align="center"> <b><i>Code</b></i></p>
